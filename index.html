@@ -42,7 +42,6 @@
       position:relative;
     }
 
-    /* Aurora animada */
     .aurora{
       position:fixed;
       inset:-25%;
@@ -61,7 +60,6 @@
       100%{transform:translate3d(2%,1.5%,0) scale(1.08)}
     }
 
-    /* Partículas flotantes */
     .bg-particles{
       position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
     }
@@ -146,9 +144,11 @@
     }
     .subtitle{
       margin:0;
-      color:var(--muted);
+      color:#dbeafe;
       font-size:1rem;
-      line-height:1.7;
+      line-height:1.6;
+      letter-spacing:.02em;
+      font-weight:600;
     }
 
     .content{
@@ -159,7 +159,6 @@
       align-items:start;
     }
 
-    /* Marco de foto con animación bonita */
     .photo-frame{
       margin:0;
       border:1px solid var(--line);
@@ -288,10 +287,6 @@
       .status{margin-left:0; width:100%; text-align:center}
       .hero-photo{aspect-ratio: 3/4; object-position:center 20%;}
     }
-
-    @media (prefers-reduced-motion: reduce){
-      *,*::before,*::after{animation:none !important; transition:none !important}
-    }
   </style>
 </head>
 <body>
@@ -304,12 +299,11 @@
       <header class="hero">
         <span class="badge">✨ Detalle especial</span>
         <h1 class="title">Para <span class="name">Yeny</span></h1>
-        <p class="subtitle">Un mensaje simple, pero de los que sí se sienten.</p>
+        <p class="subtitle">Happy Friendship Day</p>
       </header>
 
       <section class="content">
         <figure class="photo-frame">
-          <!-- IMPORTANTE: nombre exacto del archivo -->
           <img src="yen.PNG" alt="Foto de Yeny" class="hero-photo" />
           <figcaption>Gracias por todo el tiempo compartido 💫</figcaption>
         </figure>
@@ -334,7 +328,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
-    // Fondo partículas suaves
     const bg = document.getElementById("bgParticles");
     for(let i=0;i<30;i++){
       const d = document.createElement("span");
@@ -348,7 +341,6 @@
       bg.appendChild(d);
     }
 
-    // UI
     const captureBtn = document.getElementById("captureBtn");
     const statusText = document.getElementById("statusText");
     const captureArea = document.getElementById("captureArea");
@@ -360,7 +352,6 @@
       if(type) statusText.classList.add(type);
     }
 
-    // FX (corazones + fuegos)
     const canvas = document.getElementById("fxCanvas");
     const ctx = canvas.getContext("2d");
     let W = canvas.width = window.innerWidth;
@@ -421,7 +412,6 @@
           p.x += p.vx;
           p.y += p.vy;
           const a = Math.max(0,1-p.age/p.life);
-
           ctx.save();
           ctx.globalAlpha = a;
           ctx.fillStyle = `hsl(${p.hue} 95% 65%)`;
@@ -435,7 +425,6 @@
           p.y += p.vy;
           p.rot += p.rotV;
           const a = Math.max(0,1-p.age/p.life);
-
           ctx.save();
           ctx.translate(p.x,p.y);
           ctx.rotate(p.rot);
@@ -460,7 +449,6 @@
       spawnHearts();
       [[W*.25,H*.32],[W*.72,H*.28],[W*.50,H*.22],[W*.38,H*.40],[W*.64,H*.38]]
         .forEach((pt,idx)=>setTimeout(()=>spawnFirework(pt[0],pt[1]), idx*170));
-
       if(!running){
         running = true;
         requestAnimationFrame(animateFX);
