@@ -3,168 +3,324 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amistad Compartida | Yeny</title>
-  <meta name="description" content="Página premium de amistad compartida para Yeny" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <title>Detalle Especial | Yeny</title>
+  <meta name="description" content="Detalle especial con animación y captura de pantalla" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root{
-      --bg1:#070b17; --bg2:#0f172a; --bg3:#1e1b4b; --bg4:#3b0764;
-      --text:#f8fafc; --muted:#cbd5e1; --line:rgba(255,255,255,.18);
-      --glass:rgba(255,255,255,.10); --glass2:rgba(255,255,255,.06);
-      --accent:#a78bfa; --accent2:#f472b6; --accent3:#22d3ee;
-      --ok:#86efac; --err:#fca5a5; --shadow:0 30px 80px rgba(0,0,0,.48);
+      --bg1:#050814;
+      --bg2:#0e172a;
+      --bg3:#1d1b4b;
+      --bg4:#3b0764;
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --line:rgba(255,255,255,.18);
+      --glass:rgba(255,255,255,.10);
+      --glass2:rgba(255,255,255,.06);
+      --accent:#a78bfa;
+      --accent2:#f472b6;
+      --ok:#86efac;
+      --err:#fca5a5;
+      --shadow:0 30px 80px rgba(0,0,0,.50);
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; color:var(--text); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(1200px 700px at 10% 10%, rgba(34,211,238,.14), transparent 55%),
+        radial-gradient(1200px 700px at 10% 10%, rgba(34,211,238,.12), transparent 55%),
         radial-gradient(1200px 700px at 90% 90%, rgba(244,114,182,.14), transparent 50%),
         linear-gradient(135deg,var(--bg1),var(--bg2) 40%,var(--bg3) 72%,var(--bg4));
-      overflow-x:hidden; position:relative;
+      overflow-x:hidden;
+      position:relative;
     }
+
+    /* Aurora animada */
     .aurora{
-      position:fixed; inset:-25%; z-index:0; pointer-events:none; filter:blur(56px) saturate(120%); opacity:.52;
+      position:fixed;
+      inset:-25%;
+      z-index:0;
+      pointer-events:none;
+      filter:blur(56px) saturate(120%);
+      opacity:.55;
       background:
-        radial-gradient(circle at 20% 30%, rgba(167,139,250,.55), transparent 35%),
+        radial-gradient(circle at 22% 30%, rgba(167,139,250,.58), transparent 35%),
         radial-gradient(circle at 80% 35%, rgba(34,211,238,.42), transparent 36%),
         radial-gradient(circle at 52% 78%, rgba(244,114,182,.48), transparent 42%);
-      animation:auroraMove 16s ease-in-out infinite alternate;
+      animation:auroraMove 14s ease-in-out infinite alternate;
     }
-    @keyframes auroraMove{0%{transform:translate3d(-2%,-1%,0) scale(1)}100%{transform:translate3d(2%,1.5%,0) scale(1.08)}}
+    @keyframes auroraMove{
+      0%{transform:translate3d(-2%,-1%,0) scale(1)}
+      100%{transform:translate3d(2%,1.5%,0) scale(1.08)}
+    }
 
-    .wrap{min-height:100%; display:grid; place-items:center; padding:34px 18px; position:relative; z-index:1;}
-    .card{
-      width:min(980px,96vw); border:1px solid var(--line); border-radius:26px;
-      background:linear-gradient(160deg,var(--glass),var(--glass2)); backdrop-filter:blur(12px);
-      box-shadow:var(--shadow); overflow:hidden; position:relative; isolation:isolate;
-      animation:fadeUp .9s ease both;
+    /* Partículas flotantes */
+    .bg-particles{
+      position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
     }
+    .p{
+      position:absolute;
+      width:6px; height:6px;
+      border-radius:999px;
+      background:linear-gradient(180deg,var(--accent),var(--accent2));
+      box-shadow:0 0 16px rgba(167,139,250,.7);
+      opacity:.2;
+      animation:rise linear infinite;
+    }
+    @keyframes rise{
+      from{transform:translateY(110vh) translateX(0) scale(.7); opacity:0}
+      20%{opacity:.25}
+      to{transform:translateY(-20vh) translateX(35px) scale(1.1); opacity:0}
+    }
+
+    .wrap{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding:30px 16px;
+      position:relative;
+      z-index:1;
+    }
+
+    .card{
+      width:min(900px,95vw);
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:linear-gradient(160deg,var(--glass),var(--glass2));
+      backdrop-filter:blur(12px);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+      isolation:isolate;
+      animation:cardIn .9s ease both;
+    }
+
     .card::before{
-      content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px;
-      background:linear-gradient(120deg, rgba(167,139,250,.75), rgba(34,211,238,.38), rgba(244,114,182,.72));
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius:inherit;
+      padding:1px;
+      background:linear-gradient(120deg, rgba(167,139,250,.75), rgba(34,211,238,.35), rgba(244,114,182,.72));
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; animation:hueSpin 6s linear infinite;
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      animation:hueSpin 6s linear infinite;
     }
     @keyframes hueSpin{from{filter:hue-rotate(0)}to{filter:hue-rotate(360deg)}}
+    @keyframes cardIn{from{opacity:0; transform:translateY(18px) scale(.99)}to{opacity:1; transform:translateY(0) scale(1)}}
 
-    .hero{padding:40px 34px 24px; border-bottom:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));}
+    .hero{
+      padding:30px 26px 18px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    }
     .badge{
-      display:inline-flex; align-items:center; gap:8px; font-size:.82rem; font-weight:700; letter-spacing:.02em; color:#fff;
-      border:1px solid rgba(255,255,255,.26); border-radius:999px; padding:9px 14px;
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:999px;
+      padding:8px 13px;
+      font-size:.8rem; font-weight:700;
       background:linear-gradient(90deg, rgba(167,139,250,.3), rgba(244,114,182,.25));
     }
     .title{
-      margin:14px 0 10px; font-family:"Playfair Display",serif; font-size:clamp(1.75rem,3.2vw,2.7rem); line-height:1.12; color:#fff;
+      margin:12px 0 8px;
+      font-family:"Playfair Display",serif;
+      font-size:clamp(1.55rem,2.8vw,2.3rem);
+      line-height:1.15;
+      color:#fff;
+      letter-spacing:.01em;
     }
     .name{
-      background:linear-gradient(90deg,#c4b5fd,#f9a8d4,#67e8f9); -webkit-background-clip:text; background-clip:text; color:transparent;
+      background:linear-gradient(90deg,#c4b5fd,#f9a8d4,#67e8f9);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
     }
-    .subtitle{margin:0; max-width:780px; font-size:1.04rem; line-height:1.82; color:var(--muted);}
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.7;
+    }
 
-    .content{padding:28px 34px 24px; display:grid; gap:16px;}
+    .content{
+      padding:20px 26px 18px;
+      display:grid;
+      gap:14px;
+      grid-template-columns: 340px 1fr;
+      align-items:start;
+    }
 
-    /* FOTO RESPONSIVE BIEN CUIDADA */
+    /* Marco de foto con animación bonita */
     .photo-frame{
-      border:1px solid var(--line); border-radius:18px; padding:10px;
-      background:linear-gradient(165deg, rgba(255,255,255,.13), rgba(255,255,255,.06));
-      box-shadow:0 14px 30px rgba(0,0,0,.25);
+      margin:0;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:10px;
+      background:linear-gradient(165deg, rgba(255,255,255,.13), rgba(255,255,255,.05));
+      box-shadow:0 14px 30px rgba(0,0,0,.28);
+      position:relative;
+      overflow:hidden;
+      animation:photoIn 1s ease .15s both;
     }
+    .photo-frame::before{
+      content:"";
+      position:absolute;
+      inset:auto -30% -55% -30%;
+      height:150px;
+      background:radial-gradient(ellipse at center, rgba(255,255,255,.2), transparent 70%);
+      animation:shine 5s ease-in-out infinite;
+      pointer-events:none;
+    }
+
     .hero-photo{
       width:100%;
-      /* mantiene proporción sin deformar */
       aspect-ratio: 4 / 5;
-      object-fit: cover;
-      object-position: center 24%;
+      object-fit:cover;
+      object-position:center 24%;
       display:block;
-      border-radius:12px;
-      filter:saturate(1.03) contrast(1.02);
+      border-radius:11px;
+      filter:saturate(1.04) contrast(1.03);
+      transform:scale(1);
+      animation:floatPhoto 4.2s ease-in-out infinite;
     }
+
     .photo-frame figcaption{
-      margin-top:10px; text-align:center; font-size:.92rem; color:#dbeafe; letter-spacing:.01em;
+      margin-top:8px;
+      text-align:center;
+      font-size:.85rem;
+      color:#dbeafe;
+      letter-spacing:.01em;
     }
 
-    .message-box{
-      border:1px solid var(--line); border-radius:18px; padding:22px 20px;
-      background:linear-gradient(165deg, rgba(255,255,255,.13), rgba(255,255,255,.06));
-      position:relative; overflow:hidden;
+    @keyframes photoIn{
+      from{opacity:0; transform:translateY(16px) scale(.98)}
+      to{opacity:1; transform:translateY(0) scale(1)}
     }
+    @keyframes floatPhoto{
+      0%,100%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(-4px) scale(1.01)}
+    }
+    @keyframes shine{
+      0%,100%{transform:translateX(-10%); opacity:.02}
+      46%{opacity:.4}
+      56%{transform:translateX(10%); opacity:.08}
+    }
+
+    .text-box{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px 16px;
+      background:linear-gradient(165deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
+      animation:textIn .95s ease .25s both;
+    }
+    @keyframes textIn{
+      from{opacity:0; filter:blur(2px); transform:translateY(8px)}
+      to{opacity:1; filter:blur(0); transform:translateY(0)}
+    }
+
     .message{
-      margin:0; font-size:clamp(1.06rem,1.45vw,1.23rem); line-height:2; color:#f8fafc;
+      margin:0;
+      font-size:clamp(1rem,1.25vw,1.12rem);
+      line-height:1.95;
+      color:#f8fafc;
+      text-wrap:pretty;
     }
-
-    .pill-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px;}
-    .pill{
-      border:1px solid var(--line); border-radius:14px; padding:12px;
-      background:linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
-      color:#e2e8f0; font-size:.94rem; display:flex; align-items:center; gap:9px;
-    }
-    .dot{width:9px;height:9px;border-radius:999px; background:linear-gradient(180deg,var(--accent),var(--accent2)); box-shadow:0 0 16px rgba(167,139,250,.65);}
 
     .actions{
-      padding:20px 34px 28px; border-top:1px solid var(--line);
-      display:flex; flex-wrap:wrap; gap:12px; align-items:center;
+      padding:16px 26px 22px;
+      border-top:1px solid var(--line);
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
       background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
     }
+
     .btn{
-      border:0; cursor:pointer; border-radius:12px; padding:12px 17px; font-weight:800; letter-spacing:.01em; color:#fff;
-      background:linear-gradient(90deg,#8b5cf6,#ec4899); box-shadow:0 12px 28px rgba(139,92,246,.35);
+      border:0; cursor:pointer;
+      border-radius:12px;
+      padding:11px 16px;
+      font-weight:800;
+      color:#fff;
+      background:linear-gradient(90deg,#8b5cf6,#ec4899);
+      box-shadow:0 12px 28px rgba(139,92,246,.35);
+      transition:transform .15s ease, opacity .2s ease;
     }
-    .status{margin-left:auto; border:1px solid var(--line); border-radius:999px; padding:8px 12px; font-size:.92rem; color:#cbd5e1; background:rgba(255,255,255,.06);}
-    .status.ok{color:var(--ok)} .status.err{color:var(--err)}
-    .foot{padding:0 34px 24px; text-align:center; color:#94a3b8; font-size:.84rem;}
+    .btn:hover{transform:translateY(-1px); opacity:.97}
 
-    #fxCanvas{position:fixed; inset:0; z-index:40; pointer-events:none;}
+    .status{
+      margin-left:auto;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:.9rem;
+      color:#cbd5e1;
+      background:rgba(255,255,255,.06);
+    }
+    .status.ok{color:var(--ok)}
+    .status.err{color:var(--err)}
 
-    @keyframes fadeUp{from{opacity:0; transform:translateY(18px) scale(.99)} to{opacity:1; transform:translateY(0) scale(1)}}
+    .foot{
+      padding:0 26px 18px;
+      text-align:center;
+      font-size:.82rem;
+      color:#94a3b8;
+    }
 
-    @media (max-width:860px){ .pill-grid{grid-template-columns:1fr;} }
+    #fxCanvas{
+      position:fixed; inset:0;
+      z-index:40;
+      pointer-events:none;
+    }
+
+    @media (max-width:860px){
+      .content{grid-template-columns:1fr;}
+      .photo-frame{max-width:420px; justify-self:center; width:100%;}
+    }
     @media (max-width:640px){
-      .hero,.content,.actions,.foot{padding-left:18px; padding-right:18px}
+      .hero,.content,.actions,.foot{padding-left:16px; padding-right:16px}
       .status{margin-left:0; width:100%; text-align:center}
-      .hero-photo{aspect-ratio: 3 / 4; object-position:center 20%;}
+      .hero-photo{aspect-ratio: 3/4; object-position:center 20%;}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{animation:none !important; transition:none !important}
     }
   </style>
 </head>
 <body>
   <div class="aurora"></div>
+  <div class="bg-particles" id="bgParticles"></div>
   <canvas id="fxCanvas"></canvas>
 
   <main class="wrap">
     <section class="card" id="captureArea">
       <header class="hero">
-        <span class="badge">🤝 Amistad compartida</span>
-        <h1 class="title">Un detalle especial para <span class="name">Yeny</span></h1>
-        <p class="subtitle">
-          Hay amistades que se sienten reales desde lo simple:
-          respeto, confianza, cariño y esa energía bonita que siempre suma.
-        </p>
+        <span class="badge">✨ Detalle especial</span>
+        <h1 class="title">Para <span class="name">Yeny</span></h1>
+        <p class="subtitle">Un mensaje simple, pero de los que sí se sienten.</p>
       </header>
 
       <section class="content">
         <figure class="photo-frame">
-          <!-- IMPORTANTE: el nombre debe coincidir EXACTO -->
-          <img src="yen.png" alt="Foto de Yeny" class="hero-photo">
-          <figcaption>Una amistad bonita que siempre suma ✨</figcaption>
+          <!-- IMPORTANTE: nombre exacto del archivo -->
+          <img src="yen.PNG" alt="Foto de Yeny" class="hero-photo" />
+          <figcaption>Gracias por todo el tiempo compartido 💫</figcaption>
         </figure>
 
-        <article class="message-box">
+        <article class="text-box">
           <p class="message">
-            Feliz día de nuestra linda amistad, Yeny.
-            Gracias por estar, por tu buena vibra y por esos momentos que hacen más bonito cualquier día.
-            Que nunca nos falten las sonrisas, las conversaciones sinceras y esta amistad tan especial que compartimos.
+            Gracias por todo el tiempo compartido, Yeny.<br>
+            Te deseo, como siempre, que te vaya muy bien en todo.<br>
+            Quédate con esa luz bonita que tienes.
           </p>
         </article>
-
-        <div class="pill-grid">
-          <div class="pill"><span class="dot"></span>Que siempre exista confianza</div>
-          <div class="pill"><span class="dot"></span>Que nunca falte una sonrisa</div>
-          <div class="pill"><span class="dot"></span>Que la amistad siga creciendo</div>
-        </div>
       </section>
 
       <section class="actions">
@@ -178,25 +334,46 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
+    // Fondo partículas suaves
+    const bg = document.getElementById("bgParticles");
+    for(let i=0;i<30;i++){
+      const d = document.createElement("span");
+      d.className = "p";
+      const s = 3 + Math.random()*5;
+      d.style.width = s + "px";
+      d.style.height = s + "px";
+      d.style.left = Math.random()*100 + "vw";
+      d.style.animationDuration = (10 + Math.random()*14) + "s";
+      d.style.animationDelay = (-Math.random()*16) + "s";
+      bg.appendChild(d);
+    }
+
+    // UI
     const captureBtn = document.getElementById("captureBtn");
     const statusText = document.getElementById("statusText");
     const captureArea = document.getElementById("captureArea");
-    const fxCanvas = document.getElementById("fxCanvas");
-    const ctx = fxCanvas.getContext("2d");
-    let W = fxCanvas.width = window.innerWidth;
-    let H = fxCanvas.height = window.innerHeight;
-    let particles = [];
-    let running = false;
-
     document.getElementById("year").textContent = new Date().getFullYear();
-    window.addEventListener("resize", ()=>{ W = fxCanvas.width = window.innerWidth; H = fxCanvas.height = window.innerHeight; });
 
-    function setStatus(t, type=""){
-      statusText.textContent = t;
+    function setStatus(text, type=""){
+      statusText.textContent = text;
       statusText.classList.remove("ok","err");
       if(type) statusText.classList.add(type);
     }
-    const rand = (a,b)=>Math.random()*(b-a)+a;
+
+    // FX (corazones + fuegos)
+    const canvas = document.getElementById("fxCanvas");
+    const ctx = canvas.getContext("2d");
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+    let particles = [];
+    let running = false;
+
+    window.addEventListener("resize", () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    });
+
+    const rand = (a,b) => Math.random()*(b-a)+a;
 
     function heartPath(x,y,s){
       ctx.beginPath();
@@ -207,16 +384,27 @@
     }
 
     function spawnFirework(cx,cy){
-      for(let i=0;i<68;i++){
-        const ang = (Math.PI*2/68)*i + rand(-0.04,0.04);
-        const sp = rand(1.8,5.8);
-        particles.push({x:cx,y:cy,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,age:0,life:rand(55,90),size:rand(1.4,3.1),type:"spark",hue:rand(180,330)});
+      const n = 64;
+      for(let i=0;i<n;i++){
+        const ang = (Math.PI*2/n)*i + rand(-0.05,0.05);
+        const sp = rand(1.8,5.5);
+        particles.push({
+          x:cx,y:cy,
+          vx:Math.cos(ang)*sp, vy:Math.sin(ang)*sp,
+          age:0, life:rand(55,88), size:rand(1.3,3.0),
+          type:"spark", hue:rand(180,330)
+        });
       }
     }
 
     function spawnHearts(){
-      for(let i=0;i<52;i++){
-        particles.push({x:rand(W*.15,W*.85),y:H+rand(8,60),vx:rand(-.7,.7),vy:rand(-5.6,-2.8),age:0,life:rand(85,130),size:rand(6,12),type:"heart",rot:rand(0,Math.PI*2),rotV:rand(-.05,.05)});
+      for(let i=0;i<48;i++){
+        particles.push({
+          x:rand(W*0.15,W*0.85), y:H+rand(6,56),
+          vx:rand(-0.7,0.7), vy:rand(-5.5,-2.7),
+          age:0, life:rand(85,125), size:rand(6,11),
+          type:"heart", rot:rand(0,Math.PI*2), rotV:rand(-0.05,0.05)
+        });
       }
     }
 
@@ -228,30 +416,44 @@
         const p = particles[i];
         p.age++;
 
-        if(p.type==="spark"){
-          p.vy += .03; p.x += p.vx; p.y += p.vy;
+        if(p.type === "spark"){
+          p.vy += 0.03;
+          p.x += p.vx;
+          p.y += p.vy;
           const a = Math.max(0,1-p.age/p.life);
+
           ctx.save();
           ctx.globalAlpha = a;
           ctx.fillStyle = `hsl(${p.hue} 95% 65%)`;
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+          ctx.fill();
           ctx.restore();
-        }else{
-          p.vy += .035; p.x += p.vx; p.y += p.vy; p.rot += p.rotV;
+        } else {
+          p.vy += 0.035;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.rotV;
           const a = Math.max(0,1-p.age/p.life);
+
           ctx.save();
-          ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha = a;
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.rot);
+          ctx.globalAlpha = a;
           const g = ctx.createLinearGradient(-p.size,-p.size,p.size,p.size);
-          g.addColorStop(0,"#f9a8d4"); g.addColorStop(1,"#c4b5fd");
-          ctx.fillStyle = g; heartPath(0,0,p.size); ctx.fill();
+          g.addColorStop(0,"#f9a8d4");
+          g.addColorStop(1,"#c4b5fd");
+          ctx.fillStyle = g;
+          heartPath(0,0,p.size);
+          ctx.fill();
           ctx.restore();
         }
 
-        if(p.age>=p.life) particles.splice(i,1);
+        if(p.age >= p.life) particles.splice(i,1);
       }
 
-      if(particles.length>0) requestAnimationFrame(animateFX);
-      else running=false;
+      if(particles.length > 0) requestAnimationFrame(animateFX);
+      else running = false;
     }
 
     function celebrate(){
@@ -259,10 +461,13 @@
       [[W*.25,H*.32],[W*.72,H*.28],[W*.50,H*.22],[W*.38,H*.40],[W*.64,H*.38]]
         .forEach((pt,idx)=>setTimeout(()=>spawnFirework(pt[0],pt[1]), idx*170));
 
-      if(!running){ running = true; requestAnimationFrame(animateFX); }
+      if(!running){
+        running = true;
+        requestAnimationFrame(animateFX);
+      }
     }
 
-    captureBtn.addEventListener("click", async ()=>{
+    captureBtn.addEventListener("click", async () => {
       try{
         setStatus("Generando captura...", "");
         celebrate();
@@ -274,14 +479,14 @@
           scrollY: -window.scrollY
         });
 
-        const link = document.createElement("a");
-        link.download = "amistad-compartida-yeny.png";
-        link.href = shot.toDataURL("image/png");
-        link.click();
+        const a = document.createElement("a");
+        a.download = "detalle-para-yeny.png";
+        a.href = shot.toDataURL("image/png");
+        a.click();
 
         setStatus("Captura descargada ✅", "ok");
-      }catch(e){
-        console.error(e);
+      }catch(err){
+        console.error(err);
         setStatus("No se pudo capturar ❌", "err");
       }
     });
